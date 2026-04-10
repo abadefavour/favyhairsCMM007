@@ -90,6 +90,8 @@ if (isset($_POST['register'])) {
 </head>
 <body>
 
+<!-- Body comment -->
+
 <div class="bodyContainer">
 
 <div class="loginOverlay">
