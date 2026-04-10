@@ -169,5 +169,7 @@ if ($result && $result->num_rows > 0) {
 
 <?php } ?>
 
+<link rel="stylesheet" href="dashboard.php">
+
 </body>
 </html>

@@ -187,7 +187,7 @@ if ($result && $result->num_rows > 0) {
 
 <tr>
     <td><?php echo htmlspecialchars($row['name']); ?></td>
-    <td>$<?php echo htmlspecialchars($row['price_per_day']); ?></td>
+    <td>£<?php echo htmlspecialchars($row['price_per_day']); ?></td>
     <td><?php echo htmlspecialchars($row['stock']); ?></td>
     <td>
         <form method="POST">
@@ -205,6 +205,10 @@ if ($result && $result->num_rows > 0) {
 ?>
 
 </table>
+
+ <div>
+        <a href="dashboard.php" class="back-btn">⬅ Back to Dashboard</a>
+    </div>
 
 </div>
 

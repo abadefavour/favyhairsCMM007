@@ -5,8 +5,8 @@
     </div>
 
     <div class="nav-right">
-        <input type="text" placeholder="Search..." class="search-box">
-        <button class="search-btn">Search</button>
+        <!-- <input type="text" placeholder="Search..." class="search-box">
+        <button class="search-btn">Search</button> -->
 
         <form method="POST" action="../logout.php">
             <button class="logout-btn">Logout</button>

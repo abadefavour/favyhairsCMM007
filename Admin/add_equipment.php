@@ -2,10 +2,17 @@
 session_start();
 include "../db_connect.php";
 
+// ✅ HANDLE LOGOUT
+if (isset($_POST['logout'])) {
+    session_unset();
+    session_destroy();
+    header("Location: /FAVYHAIRS/User/login.php");
+    exit();
+}
 
-if($_SESSION['role'] != "admin"){
-    header("Location: ..
-    /login.php");
+// ✅ Protect page (MUST match all pages)
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "admin") {
+    header("Location: /FAVYHAIRS/User/login.php");
     exit();
 }
 
@@ -20,7 +27,6 @@ if(isset($_POST['add_equipment'])){
     $condition = $_POST['condition'];
     $description = $_POST['description'];
 
-    
     $sql = "INSERT INTO equipment_table 
     (name, price_per_day, category, quantity, equipment_condition, description, status) 
     VALUES 
@@ -37,18 +43,38 @@ if(isset($_POST['add_equipment'])){
 <!DOCTYPE html>
 <html>
 <head>
+<title>Add Equipment</title>
 <link rel="stylesheet" href="../css/style_3.css">
 </head>
 
 <body>
 
+<!-- ✅ NAVBAR -->
+<div style="background:#2c3e50; padding:10px; display:flex; justify-content:space-between; align-items:center;">
+    
+    <div>
+        <!-- ✅ FIXED DASHBOARD LINK -->
+        <a href="/FAVYHAIRS/Admin/admin_dashboard.php" style="color:white; text-decoration:none; font-weight:bold;">
+            Dashboard
+        </a>
+    </div>
 
+    <div>
+        <form method="POST" style="display:inline;">
+            <button type="submit" name="logout" 
+                style="background:#e74c3c; color:white; border:none; padding:6px 12px; cursor:pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+
+</div>
 
 <div class="container">
 
 <h3>Add Equipment</h3>
 
-<p><?php echo $message; ?></p>
+<?php if(!empty($message)) echo "<p>$message</p>"; ?>
 
 <form method="POST">
 

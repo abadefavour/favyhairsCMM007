@@ -130,6 +130,25 @@ button {
 }
 
 
+.back-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 9px 18px;
+    background-color: #2b3a4a;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+    font-size: 0.98rem;
+}
+
+.back-btn:hover {
+    background-color: #1f2b38;
+    transform: translateY(-1px);
+}
+
+
 
 
 

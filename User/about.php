@@ -20,6 +20,8 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 
+
+
 <div class="about-page">
 
     <h1>About FavyHairs Equipment Rental</h1>
@@ -134,6 +136,8 @@ if (!isset($_SESSION['user_id'])) {
     </div>
 
 </div>
+
+
 
 </body>
 </html>

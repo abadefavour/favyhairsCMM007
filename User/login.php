@@ -87,6 +87,14 @@ if(isset($_POST['login'])) {
 
 <input type="password" name="password" placeholder="Password" required>
 
+<label for="role">Choose Role:</label>
+
+<select name="role" required>
+<option value="">Select Role</option>
+<option value="admin">Admin</option>
+<option value="user">User</option>
+</select>
+
 <button type="submit" name="login">Login</button>
 
 </form>

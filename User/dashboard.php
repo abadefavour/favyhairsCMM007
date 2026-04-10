@@ -86,7 +86,7 @@ if (!empty($search)) {
         </span>
         
 <form method="POST">
-    <button type="submit" name="logout" class="btn btn-primary btn-sm">Logout</button>
+    <button type="submit" name="logout" class="btn btn-primary btn-sm" style="width: 76px;">Logout</button>
 </form>
     </div>
 </nav>
@@ -141,7 +141,7 @@ if (!empty($search)) {
                                     <h6 class="card-title">
                                         <?php echo $item['name']; ?>
                                     </h6>
-                                    <p class="text-muted small">Available for rent</p>
+                                    <p class="text-muted small">Rent</p>
                                 </div>
 
                             </div>

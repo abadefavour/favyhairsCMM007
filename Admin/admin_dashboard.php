@@ -5,8 +5,7 @@ include "../db_connect.php";
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$_SESSION['user_id'] = 1;
-$_SESSION['role'] = "admin";
+
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "admin") {
     header("Location: /FAVYHAIRS/User/login.php");
@@ -47,6 +46,10 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "admin") {
 
         <li class="nav-item">
           <a class="nav-link" href="add_equipment.php">Add Equipment</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="manage_equipment.php">Manage Equipment</a>
         </li>
 
         <li class="nav-item">
@@ -94,6 +97,16 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "admin") {
                     <h5 class="card-title">Add Equipment</h5>
                     <p class="card-text">Add new equipment.</p>
                     <a href="add_equipment.php" class="btn btn-primary">Add</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Manage Equipment</h5>
+                    <p class="card-text">Edit, delete or view equipment.</p>
+                    <a href="manage_equipment.php" class="btn btn-secondary">Manage</a>
                 </div>
             </div>
         </div>

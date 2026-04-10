@@ -1,0 +1,179 @@
+/* manage_equipment css */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #eef1f5;
+    margin: 0;
+}
+
+nav {
+    background-color: #2c3e50;
+    padding: 12px 20px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 85%;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 6px;
+}
+
+h3 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+p b {
+    color: #27ae60;
+    display: block;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+a {
+    display: inline-block;
+    background-color: #3498db;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+a:hover {
+    background-color: #2980b9;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background-color: #34495e;
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f5f7fa;
+}
+
+button {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #c0392b;
+}
+
+form {
+    display: inline;
+}
+
+
+/* edit equipment css */
+/* Page background */
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container */
+.container {
+    width: 40%;
+    margin: 60px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form layout */
+.form-box {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+label {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Inputs */
+input, textarea {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+}
+
+/* Textarea height */
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Button */
+button {
+    margin-top: 20px;
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Button hover */
+button:hover {
+    background: #0056b3;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+
+
+
