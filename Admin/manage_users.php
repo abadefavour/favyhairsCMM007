@@ -39,79 +39,128 @@ $users = $conn->query("SELECT * FROM user");
 <html>
 <head>
     <title>Manage Users</title>
-    <link rel="stylesheet" href="../css/style_2.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
 
-<?php include "nav.php"; ?>
+<div class="min-h-screen bg-gray-50">
+  <?php include_once '../include/admin-header.php'; ?>
 
-<div class="container">
+  <div class="max-w-6xl mx-auto p-6">
 
-<h3>Manage Users</h3>
+    <!-- Page Title -->
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Manage Users</h1>
 
-<form method="POST">
-    <input type="text" name="first_name" placeholder="First Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
+    <!-- Add User Card -->
+    <div class="bg-white rounded-xl shadow-sm p-6 mb-8">
+      <h2 class="text-lg font-semibold mb-4">Add New User</h2>
 
-    <select name="role">
-        <option value="user">User</option>
-        <option value="admin">Admin</option>
-    </select>
+      <form method="POST" class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        
+        <input type="text" name="first_name" placeholder="First Name" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none">
 
-    <button type="submit" name="add_user">Add User</button>
-</form>
+        <input type="email" name="email" placeholder="Email" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none">
 
-<br>
+        <input type="password" name="password" placeholder="Password" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none">
 
-<table>
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Role</th>
-<th>Actions</th>
-</tr>
+        <select name="role"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-pink-500 focus:outline-none">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
 
-<?php while($row = $users->fetch_assoc()){ ?>
-<tr>
+        <div class="md:col-span-2 lg:col-span-4">
+          <button type="submit" name="add_user"
+            class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg transition">
+            Add User
+          </button>
+        </div>
 
-<form method="POST">
+      </form>
+    </div>
 
-<td>
-    <input type="text" name="first_name" value="<?= $row['first_name'] ?>">
-</td>
+    <!-- Users Table -->
+    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
 
-<td>
-    <input type="email" name="email" value="<?= $row['email'] ?>">
-</td>
+        <table class="min-w-full text-sm text-left">
+          <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+            <tr>
+              <th class="px-6 py-3">Name</th>
+              <th class="px-6 py-3">Email</th>
+              <th class="px-6 py-3">Role</th>
+              <th class="px-6 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
 
-<td>
-    <select name="role">
-        <option value="user" <?= $row['role']=="user" ? "selected" : "" ?>>User</option>
-        <option value="admin" <?= $row['role']=="admin" ? "selected" : "" ?>>Admin</option>
-    </select>
-</td>
+          <tbody class="divide-y">
 
-<td>
-    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+            <?php while($row = $users->fetch_assoc()){ ?>
+            <tr class="hover:bg-gray-50">
 
-    <button type="submit" name="update">Update</button>
+              <form method="POST" class="contents">
 
-</form>
+                <!-- Name -->
+                <td class="px-6 py-4">
+                  <input type="text" name="first_name"
+                    value="<?= $row['first_name'] ?>"
+                    class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:ring-1 focus:ring-pink-500 outline-none">
+                </td>
 
-<form method="POST" style="display:inline;">
-    <input type="hidden" name="id" value="<?= $row['id'] ?>">
-    <button type="submit" name="delete">Delete</button>
-</form>
+                <!-- Email -->
+                <td class="px-6 py-4">
+                  <input type="email" name="email"
+                    value="<?= $row['email'] ?>"
+                    class="w-full border border-gray-300 rounded-lg px-2 py-1 focus:ring-1 focus:ring-pink-500 outline-none">
+                </td>
 
-</td>
+                <!-- Role -->
+                <td class="px-6 py-4">
+                  <select name="role"
+                    class="border border-gray-300 rounded-lg px-2 py-1 focus:ring-1 focus:ring-pink-500 outline-none">
+                    <option value="user" <?= $row['role']=="user" ? "selected" : "" ?>>User</option>
+                    <option value="admin" <?= $row['role']=="admin" ? "selected" : "" ?>>Admin</option>
+                  </select>
+                </td>
 
-</tr>
-<?php } ?>
+                <!-- Actions -->
+                <td class="px-6 py-4 text-right space-x-2">
 
-</table>
+                  <input type="hidden" name="id" value="<?= $row['id'] ?>">
 
+                  <button type="submit" name="update"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-lg text-xs">
+                    Update
+                  </button>
+
+              </form>
+
+              <form method="POST" class="inline">
+                <input type="hidden" name="id" value="<?= $row['id'] ?>">
+
+                <button type="submit" name="delete"
+                  class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs">
+                  Delete
+                </button>
+              </form>
+
+                </td>
+
+            </tr>
+            <?php } ?>
+
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
 </div>
+
 </body>
 </html>

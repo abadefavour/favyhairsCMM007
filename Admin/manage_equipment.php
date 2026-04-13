@@ -2,8 +2,6 @@
 session_start();
 include "../db_connect.php";
 
-$conn = new mysqli("localhost", "root", "", "favyhairs");
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -46,73 +44,106 @@ $result = $conn->query("SELECT * FROM equipment_table ORDER BY id ASC");
 <html>
 <head>
 <title>Manage Equipment</title>
-<link rel="stylesheet" href="../css/style_5.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
 
-<div style="background:#2c3e50; padding:10px;">
-    <a href="admin_dashboard.php" style="color:white; margin-right:15px; text-decoration:none;">Dashboard</a>
+<div>
+    <?php include '../include/admin-header.php'; ?>
+    <div class="max-w-7xl mx-auto px-4 py-8">
 
-    <form method="POST" style="display:inline;">
-        <button type="submit" name="logout" style="background:#e74c3c; color:white; border:none; padding:5px 10px;">
-            Logout
-        </button>
-    </form>
-</div>
+  <!-- Header -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
+    <h3 class="text-2xl font-bold text-gray-800">Manage Equipment</h3>
 
-<div class="container">
+    <a href="add_equipment.php"
+       class="inline-block bg-pink-500 hover:bg-pink-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition shadow">
+       + Add Equipment
+    </a>
+  </div>
 
-<h3>Manage Equipment</h3>
+  <!-- Message -->
+  <?php if (!empty($message)) { ?>
+    <div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
+      <?php echo $message; ?>
+    </div>
+  <?php } ?>
 
-<?php if (!empty($message)) echo "<p><b>$message</b></p>"; ?>
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm text-left">
+                <thead class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider">
+                    <tr>
+                        <th class="px-6 py-3">ID</th>
+                        <th class="px-6 py-3">Name</th>
+                        <th class="px-6 py-3">Description</th>
+                        <th class="px-6 py-3">Stock</th>
+                        <th class="px-6 py-3 text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
 
-<a href="add_equipment.php">+ Add Equipment</a>
-<br><br>
+                <?php
+                if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                ?>
 
-<table border="1">
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Description</th>
-<th>Stock</th>
-<th>Action</th>
-</tr>
+                <tr class="hover:bg-gray-50 transition">
 
-<?php
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-?>
+                <td class="px-6 py-4 text-gray-700">
+                    <?= $row['id'] ?>
+                </td>
 
-<tr>
-<td><?= $row['id'] ?></td>
-<td><?= htmlspecialchars($row['name']) ?></td>
-<td><?= htmlspecialchars($row['description']) ?></td>
-<td><?= $row['stock'] ?></td>
+                <td class="px-6 py-4 font-medium text-gray-800">
+                    <?= htmlspecialchars($row['name']) ?>
+                </td>
 
-<td>
+                <td class="px-6 py-4 text-gray-500 max-w-xs truncate">
+                    <?= htmlspecialchars($row['description']) ?>
+                </td>
 
-<a href="edit_equipment.php?id=<?= $row['id'] ?>">Edit</a>
+                <td class="px-6 py-4">
+                    <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-700">
+                    <?= $row['stock'] ?>
+                    </span>
+                </td>
+                <td class="px-6 py-4 text-right space-x-2">
 
-<form method="POST" style="display:inline;">
-    <input type="hidden" name="id" value="<?= $row['id'] ?>">
-    <button type="submit" name="delete" onclick="return confirm('Delete this equipment?');">
-        Delete
-    </button>
-</form>
+                    <a href="edit_equipment.php?id=<?= $row['id'] ?>"
+                    class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-3 py-1.5 rounded-md text-xs font-medium transition">
+                    Edit
+                    </a>
+                    <form method="POST" class="inline">
+                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                    <button type="submit" name="delete"
+                        onclick="return confirm('Delete this equipment?');"
+                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-xs font-medium transition">
+                        Delete
+                    </button>
+                    </form>
 
-</td>
-</tr>
+                </td>
+                </tr>
 
-<?php
-    }
-} else {
-    echo "<tr><td colspan='5'>No equipment found</td></tr>";
-}
-?>
+                <?php
+                }
+                } else {
+                ?>
 
-</table>
+                <tr>
+                <td colspan="5" class="text-center py-6 text-gray-500">
+                    No equipment found
+                </td>
+                </tr>
 
+                <?php } ?>
+
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

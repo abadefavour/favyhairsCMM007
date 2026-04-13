@@ -24,7 +24,7 @@ if(isset($_POST['submit'])) {
         $stmt->bind_param("si", $hashed_password, $user_id);
 
         if($stmt->execute()){
-            $success = "Password successfully updated! <a href='login.php'>Login</a>";
+            $success = "Password successfully updated! <a href='index.php'>Login</a>";
             unset($_SESSION['reset_user_id']); 
         } else {
             $error = "Error updating password. Try again.";

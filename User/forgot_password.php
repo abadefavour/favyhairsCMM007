@@ -48,8 +48,8 @@ if(isset($_POST['submit'])) {
     </form>
 
     <div class="links">
-        <a href="login.php">Back to Login</a>
-        <a href="register.php">Register</a>
+        <a href="../auth/login.php">Back to Login</a>
+        <a href="../auth/register.php">Register</a>
     </div>
 </div>
 

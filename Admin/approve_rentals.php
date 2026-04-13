@@ -2,8 +2,6 @@
 session_start();
 include "../db_connect.php";
 
-$conn = new mysqli("localhost", "root", "", "favyhairs");
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -81,54 +79,90 @@ $Pendingresult = $rentalStmt->get_result();
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../css/style_2.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <title>Approve Rentals</title>
 </head>
 
 <body>
 
-<?php include "nav.php"; ?>
+<div>
+    <div>
+        <?php include_once '../include/admin-header.php'; ?>
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Approve Rentals</h3>
+                <p class="text-gray-500 text-sm mt-1">Review and approve pending rental requests</p>
+            </div>
+            <?php if (!empty($message)) { ?>
+            <div class="mb-4 bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg text-sm">
+                <?php echo $message; ?>
+            </div>
+            <?php } ?>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full text-sm text-left">
+                        <thead class="bg-gray-50 text-gray-600 uppercase text-xs tracking-wider">
+                            <tr>
+                            <th class="px-6 py-3">User</th>
+                            <th class="px-6 py-3">Equipment</th>
+                            <th class="px-6 py-3">Date</th>
+                            <th class="px-6 py-3 text-right">Action</th>
+                            </tr>
+                        </thead>
+                    <tbody class="divide-y divide-gray-100">
 
-<div class="container">
+                    <?php
+                    if ($Pendingresult->num_rows > 0) {
+                        while ($row = $Pendingresult->fetch_assoc()) {
+                    ?>
 
-<h3>Approve Rentals</h3>
+                    <tr class="hover:bg-gray-50 transition">
 
-<?php if (!empty($message)) echo "<p><b>$message</b></p>"; ?>
+                        <td class="px-6 py-4 font-medium text-gray-800">
+                        <?= htmlspecialchars($row['first_name']) ?>
+                        </td>
 
-<table border="1">
-<tr>
-<th>User</th>
-<th>Equipment</th>
-<th>Date</th>
-<th>Action</th>
-</tr>
+                        <td class="px-6 py-4 text-gray-600">
+                        <?= htmlspecialchars($row['name']) ?>
+                        </td>
 
-<?php
-if ($Pendingresult->num_rows > 0) {
-    while ($row = $Pendingresult->fetch_assoc()) {
-?>
+                        <td class="px-6 py-4 text-gray-500">
+                        <?= htmlspecialchars($row['rent_date']) ?>
+                        </td>
 
-<tr>
-<td><?= htmlspecialchars($row['first_name']) ?></td>
-<td><?= htmlspecialchars($row['name']) ?></td>
-<td><?= htmlspecialchars($row['rent_date']) ?></td>
-<td>
-<form method="POST">
-<input type="hidden" name="id" value="<?= $row['id'] ?>">
-<button type="submit" name="approve">Approve</button>
-</form>
-</td>
-</tr>
+                        <td class="px-6 py-4 text-right">
 
-<?php
-    }
-} else {
-    echo "<tr><td colspan='4'>No pending rentals</td></tr>";
-}
-?>
+                        <form method="POST" class="inline">
+                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
 
-</table>
+                            <button type="submit" name="approve"
+                            class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg text-xs font-semibold transition shadow-sm hover:shadow">
+                            Approve
+                            </button>
+                        </form>
 
+                        </td>
+                    </tr>
+
+                    <?php
+                        }
+                    } else {
+                    ?>
+
+                    <tr>
+                        <td colspan="4" class="text-center py-6 text-gray-500">
+                        No pending rentals
+                        </td>
+                    </tr>
+
+                    <?php } ?>
+
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

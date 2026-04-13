@@ -2,13 +2,8 @@
 session_start();
 include "../db_connect.php";
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "admin") {
-    header("Location: /FAVYHAIRS/User/login.php");
+    header("Location: ../auth/login.php");
     exit();
 }
 ?>
@@ -18,131 +13,82 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== "admin") {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Admin Dashboard</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 <link rel="stylesheet" href="../css/style_2.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    
-    <a class="navbar-brand" href="admin_dashboard.php">Admin Panel</a>
+<div>
+  <?php include_once '../include/admin-header.php'; ?>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="max-w-7xl mx-auto px-4 py-8">
 
-    <div class="collapse navbar-collapse" id="navbarContent">
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Welcome Admin</h2>
+      <p class="text-gray-500 mt-1">Select an action from the menu.</p>
+    </div>
 
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-        <li class="nav-item">
-          <a class="nav-link active" href="admin_dashboard.php">Dashboard</a>
-        </li>
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800">Dashboard</h5>
+        <p class="text-gray-500 mt-2">View system overview.</p>
+        <a href="admin_dashboard.php"
+           class="inline-block mt-4 bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          Go
+        </a>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="add_equipment.php">Add Equipment</a>
-        </li>
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800">Add Equipment</h5>
+        <p class="text-gray-500 mt-2">Add new equipment.</p>
+        <a href="add_equipment.php"
+           class="inline-block mt-4 bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          Add
+        </a>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="manage_equipment.php">Manage Equipment</a>
-        </li>
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800">Manage Equipment</h5>
+        <p class="text-gray-500 mt-2">Edit, delete or view equipment.</p>
+        <a href="manage_equipment.php"
+           class="inline-block mt-4 bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          Manage
+        </a>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="approve_rentals.php">Approve Rentals</a>
-        </li>
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800">Approve Rentals</h5>
+        <p class="text-gray-500 mt-2">Review rentals.</p>
+        <a href="approve_rentals.php"
+           class="inline-block mt-4 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          View
+        </a>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="approve_returns.php">Approve Returns</a>
-        </li>
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800">Approve Returns</h5>
+        <p class="text-gray-500 mt-2">Check returns.</p>
+        <a href="approve_returns.php"
+           class="inline-block mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          Check
+        </a>
+      </div>
 
-        <li class="nav-item">
-          <a class="nav-link" href="manage_users.php">Manage Users</a>
-        </li>
-
-      </ul>
-
-      <form method="POST" action="../User/logout.php" class="d-flex">
-        <button class="btn btn-danger">Logout</button>
-      </form>
+      <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800">Manage Users</h5>
+        <p class="text-gray-500 mt-2">Control users.</p>
+        <a href="manage_users.php"
+           class="inline-block mt-4 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+          Manage
+        </a>
+      </div>
 
     </div>
   </div>
-</nav>
-
-<div class="container mt-4">
-
-    <h2>Welcome Admin</h2>
-    <p>Select an action from the menu.</p>
-
-    <div class="row g-4">
-
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Dashboard</h5>
-                    <p class="card-text">View system overview.</p>
-                    <a href="admin_dashboard.php" class="btn btn-dark">Go</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Add Equipment</h5>
-                    <p class="card-text">Add new equipment.</p>
-                    <a href="add_equipment.php" class="btn btn-primary">Add</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Manage Equipment</h5>
-                    <p class="card-text">Edit, delete or view equipment.</p>
-                    <a href="manage_equipment.php" class="btn btn-secondary">Manage</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Approve Rentals</h5>
-                    <p class="card-text">Review rentals.</p>
-                    <a href="approve_rentals.php" class="btn btn-success">View</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Approve Returns</h5>
-                    <p class="card-text">Check returns.</p>
-                    <a href="approve_returns.php" class="btn btn-warning">Check</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card shadow-sm h-100">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Manage Users</h5>
-                    <p class="card-text">Control users.</p>
-                    <a href="manage_users.php" class="btn btn-info">Manage</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

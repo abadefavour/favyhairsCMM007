@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php");
+    header("Location: ../auth/login.php");
     exit();
 }
 
@@ -94,6 +94,8 @@ if (!empty($search)) {
 <div class="d-flex">
 
     
+
+
     <div class="sidebar p-3">
         <h5 class="text-white">Menu</h5>
 
@@ -106,8 +108,8 @@ if (!empty($search)) {
         </form>
 
         <ul class="nav flex-column mt-4">
-            <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="../about.php">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="../contact.php">Contact</a></li>
             <li class="nav-item"><a class="nav-link" href="view_equipment.php">Equipment</a></li>
         </ul>
     </div>

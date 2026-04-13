@@ -2,8 +2,6 @@
 session_start();
 include "../db_connect.php";
 
-$conn = new mysqli("localhost", "root", "", "favyhairs");
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -58,35 +56,65 @@ if (isset($_POST['update'])) {
 <html>
 <head>
     <title>Edit Equipment</title>
-    <link rel="stylesheet" href="../css/style_5.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
 
-<?php include "nav.php"; ?>
+    <div>
+        <?php include_once '../include/admin-header.php'; ?>
+        <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-200 px-4 py-10">
+            <div class="w-full max-w-2xl">
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8">
+                    <div class="mb-8 text-center">
+                        <h2 class="text-3xl font-bold text-gray-800">Edit Equipment</h2>
+                        <p class="text-gray-500 text-sm mt-2">
+                            Update the details of this equipment item
+                        </p>
+                    </div>
+                    <form method="POST" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Equipment Name
+                            </label>
+                            <input type="text" name="name"
+                            value="<?= htmlspecialchars($equipment['name']) ?>"
+                            class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
+                            required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Description
+                            </label>
+                            <textarea name="description" rows="4"
+                            class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"><?= htmlspecialchars($equipment['description']) ?></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                            Stock Quantity
+                            </label>
+                            <input type="number" name="stock"
+                            value="<?= htmlspecialchars($equipment['stock']) ?>"
+                            class="w-full border border-gray-300 rounded-xl px-4 py-3 bg-gray-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition"
+                            required>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-3 pt-4">
+                            <button type="submit" name="update"
+                            class="w-full sm:w-auto bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-xl font-semibold transition shadow-md hover:shadow-lg">
+                            Update Equipment
+                            </button>
+                            <a href="manage_equipment.php"
+                            class="w-full sm:w-auto text-center bg-gray-200 hover:bg-gray-300 text-gray-700 px-6 py-3 rounded-xl font-medium transition">
+                            Cancel
+                            </a>
+                        </div>
 
-<div class="container">
+                    </form>
 
-    <h2>Edit Equipment</h2>
-
-    <form method="POST" class="form-box">
-
-        <label>Name</label>
-        <input type="text" name="name"
-               value="<?= htmlspecialchars($equipment['name']) ?>" required>
-
-        <label>Description</label>
-        <textarea name="description"><?= htmlspecialchars($equipment['description']) ?></textarea>
-
-        <label>Stock</label>
-        <input type="number" name="stock"
-               value="<?= htmlspecialchars($equipment['stock']) ?>" required>
-
-        <button type="submit" name="update">Update Equipment</button>
-
-    </form>
-
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
