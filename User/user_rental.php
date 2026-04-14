@@ -32,9 +32,7 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
     try {
         $conn->begin_transaction();
 
-        /* ================================
-           LIMIT 1: MAX ACTIVE RENTALS
-        ================================= */
+      
         $max_rentals = 3;
 
         $checkRentals = $conn->prepare("
@@ -51,9 +49,7 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
             throw new Exception("You can only rent up to $max_rentals items at a time.");
         }
 
-        /* ================================
-           LOCK EQUIPMENT ROW
-        ================================= */
+    
         $stmt = $conn->prepare("
             SELECT stock 
             FROM equipment_table 
@@ -73,9 +69,7 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
             throw new Exception("Item is out of stock.");
         }
 
-        /* ================================
-           PREVENT DUPLICATE RENTAL
-        ================================= */
+     
         $checkDuplicate = $conn->prepare("
             SELECT id 
             FROM rental_table 
@@ -91,9 +85,7 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
             throw new Exception("You already rented this item.");
         }
 
-        /* ================================
-           UPDATE STOCK
-        ================================= */
+     
         $updateStock = $conn->prepare("
             UPDATE equipment_table 
             SET stock = stock - 1 
@@ -102,9 +94,7 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
         $updateStock->bind_param("i", $equipment_id);
         $updateStock->execute();
 
-        /* ================================
-           INSERT RENTAL
-        ================================= */
+      
         $insertRental = $conn->prepare("
             INSERT INTO rental_table 
             (equipment_id, user_id, rent_date, status)
@@ -116,10 +106,10 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
         $conn->commit();
         $message = "Equipment rented successfully!";
 
-    } catch (Exception $e) {
+    } catch (Exception $update) {
         $conn->rollback();
-        $message = "Update: " . $e->getMessage();
-    }
+        $message = "update:" . $update->getMessage();
+    }error_logR
 }
 ?>
 
