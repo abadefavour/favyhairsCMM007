@@ -118,7 +118,7 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
 
     } catch (Exception $e) {
         $conn->rollback();
-        $message = "Error: " . $e->getMessage();
+        $message = "Update: " . $e->getMessage();
     }
 }
 ?>
