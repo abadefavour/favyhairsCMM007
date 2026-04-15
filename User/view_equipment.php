@@ -24,13 +24,13 @@ if($conn->connect_error){
 <body>
 
 <nav>
-<a href="about.php">About</a>
-<a href="contact.php">Contact Us</a>
+<a href="../about.php">About</a>
+<a href="../contact.php">Contact Us</a>
 <a href="user_rental.php">Rent Equipment</a>
 <a href="user_return.php">Return Equipment</a>
-<a href="view_equipment.php">View Equipment</a>
-<a href="info_zone.php">Information Zone</a>
-<a href="profile.php">Profile</a>
+<a href="../view_equipment.php">View Equipment</a>
+<a href="../info_zone.php">Information Zone</a>
+<a href="../profile.php">Profile</a>
 </nav>
 
 <div class="container">
@@ -57,7 +57,7 @@ if($result && $result->num_rows > 0){
 
     while($row = $result->fetch_assoc()){
 
-        // ✅ USE STOCK INSTEAD OF STATUS
+      
         if(isset($row['stock']) && $row['stock'] > 0){
             $status = "available";
             $status_class = "available";

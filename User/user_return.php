@@ -16,9 +16,6 @@ $user_id = $_SESSION['user_id'];
 $user_name = $_SESSION['first_name'] ?? "User";
 $message = "";
 
-/* ================================
-   RETURN EQUIPMENT PROCESS
-================================ */
 if (isset($_POST['return']) && isset($_POST['rental_id'])) {
 
     $rental_id = intval($_POST['rental_id']);
@@ -27,7 +24,6 @@ if (isset($_POST['return']) && isset($_POST['rental_id'])) {
 
     try {
 
-        /* 1. Get equipment id safely */
         $stmt = $conn->prepare("
             SELECT equipment_id 
             FROM rental_table 
@@ -45,7 +41,6 @@ if (isset($_POST['return']) && isset($_POST['rental_id'])) {
 
         $equipment_id = $row['equipment_id'];
 
-        /* 2. Mark rental as returned */
         $updateRental = $conn->prepare("
             UPDATE rental_table 
             SET status='returned', return_date=NOW() 
@@ -54,7 +49,6 @@ if (isset($_POST['return']) && isset($_POST['rental_id'])) {
         $updateRental->bind_param("ii", $rental_id, $user_id);
         $updateRental->execute();
 
-        /* 3. Restore stock */
         $updateStock = $conn->prepare("
             UPDATE equipment_table 
             SET stock = stock + 1 

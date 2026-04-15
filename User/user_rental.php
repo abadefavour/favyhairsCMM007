@@ -9,14 +9,14 @@ if ($conn->connect_error) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../auth/login.php");
     exit();
 }
 
 if (isset($_POST['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: login.php");
+    header("Location: ../auth/login.php");
     exit();
 }
 
@@ -106,12 +106,13 @@ if (isset($_POST['rent']) && isset($_POST['equipment_id'])) {
         $conn->commit();
         $message = "Equipment rented successfully!";
 
-    } catch (Exception $update) {
+     } catch (Exception $e) {
         $conn->rollback();
-        $message = "update:" . $update->getMessage();
-    }error_logR
+        $message = "Error: " . $e->getMessage();
+    }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
