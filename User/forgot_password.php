@@ -18,7 +18,7 @@ if(isset($_POST['submit'])) {
 
         $_SESSION['reset_user_id'] = $user['id'];
 
-        header("Location: create_password.php");
+        header("Location: ../create_password.php");
         exit();
 
     } else {

@@ -5,7 +5,7 @@ include "db_connect.php";
 $error = $success = "";
 
 if(!isset($_SESSION['reset_user_id'])) {
-    header("Location: forgot_password.php");
+    header("Location: ../forgot_password.php");
     exit();
 }
 
